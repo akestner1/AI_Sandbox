@@ -1,0 +1,135 @@
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BoozeClues Verification</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        h1 {
+            color: deepskyblue;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+       }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 50%;
+            padding: 5px;
+        }
+
+        .drag-drop {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px dashed #888;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .drag-drop.dragover {
+            background-color: #f0f0f0;
+            border-color: #333;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>BoozeClues Verification</h1>
+    <h2>Please complete the form and attach a picture of your label</h2>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+
+        <div class="input-group">
+            <label for="productName">Product Name</label>
+            <input type="text" id="productName" name="productName" maxlength="50" required>
+        </div>
+
+        <div class="input-group">
+            <label for="productClass">Product Class / Type</label>
+            <input type="text" id="productClass" name="productClass" maxlength="50" required>
+        </div>
+
+        <div class="input-group">
+            <label for="alcoholPercent">Alcohol %</label>    
+ <input type="number" id="alcoholPercent" name="alcoholPercent" max="100" required>
+        </div>
+
+        <div class="input-group">
+            <label for="netVolume">Net Volume</label>
+            <input type="text" id="netVolume" name="netVolume" maxlength="50" required>
+        </div>
+
+        <div class="input-group">
+            <label for="bottledBy">Bottled By</label>
+            <input type="text" id="bottledBy" name="bottledBy" maxlength="50" required>
+        </div>
+
+        <div class="drag-drop" id="dragDropArea">
+            <p>Drag and drop a file here or click to upload</p>
+            <input type="file" id="fileUpload" name="fileUpload" required style="display:none;">
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        const dragDropArea = document.getElementById('dragDropArea');
+        const fileInput = document.getElementById('fileUpload');
+
+        dragDropArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        dragDropArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dragDropArea.classList.add('dragover');
+        });
+
+        dragDropArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dragDropArea.classList.remove('dragover');
+        });
+
+        dragDropArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dragDropArea.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) {
+                fileInput.files = e.dataTransfer.files;
+            }
+        });
+  
+ </script>
+    <h2 style="margin-top: 40px; color: #333; text-align: center; font-weight: normal;">
+        If you are having trouble completing this form, please do not fax us.
+    </h2>
+
+</body>
+</html>
